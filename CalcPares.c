@@ -6,7 +6,6 @@ int somaPar, numMax, validaPar, Counters, max;
 
 somaPar = 0;
 
-
 printf("Type a number: ");
 scanf("%i",&numMax);
 
