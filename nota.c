@@ -18,13 +18,11 @@ int main(){
     printf("Digite a nota 3  ");
     scanf("%f",&nTres);
 
-
     media = nUm+nDois+nTres;
 
     if(media>=8 && media<=10)
     {
         conc='A';
-
     }
     if(media>=7 && media<8)
     {
