@@ -1,9 +1,7 @@
 #include <stdio.h>
 
-int main()
-{
-
-    printf("Ohay motherfucker \n");
+int main(){
+    printf("Ohay motherfucker \n ");
     printf("Fatec \nAmericana");
     printf("\nRocky");
     printf("\n1+1");
@@ -13,5 +11,4 @@ int main()
     printf("\nMedia de %i e %i = %f", 5, 8, (5.0+8.0)/2);
 
     return;
-
 }
