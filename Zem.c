@@ -1,8 +1,9 @@
-//Feito por:
-//Adriano Benatti  R.A: 0040481511047
-//Andre Amorim  R.A: 0040481511025
-//Milton Neto  R.A: 0040481511026
-//Rafael Garcia R.A: 0040481411028
+/*Feito por:
+Adriano Benatti
+Andre Amorim
+Milton Neto
+Rafael Garcia
+*/
 
 #include <stdio.h>
 #include <string.h>
@@ -23,7 +24,6 @@ int main(){
     if(quantia > 5 || quantia < 1){
       printf("Valores incorretos");
     }
-
   }while(quantia > 5 || quantia < 1);
 
   fim = quantia;
@@ -69,24 +69,17 @@ int main(){
     case 1:
       system("clear");
 
-      //op = 0;
-
-      //printf("\n\t 1. Digite 1 para");
-
       if(quantia >= 5){
         printf("Numero maximo de processos ja atingido");
         break;
-      }
-      else{
-
-
+      }else{
         printf("Digite quantos itens serao adicionados: ");
         scanf("%i",&add);
 
         quantia = quantia + add;
         fim = quantia;
       }
-
+      
       if(quantia <= 5){
         for(i=(quantia-add);i<quantia;i++){
             printf("\nInsira o nome do processo %i: ", i+1);
@@ -94,9 +87,7 @@ int main(){
             printf("\nInsira quantidade de execucoes do processo %i: ", i+1);
             scanf("%i",&exe[i]);
         }
-      }
-
-      else if((add+quantia) > 5){
+      }else if((add+quantia) > 5){
         printf("Quantia maxima ultrapassada");
       }
      break;
@@ -135,11 +126,11 @@ int main(){
                 printf("\nInsira as vezes que o processo %c sera executado: ", nome[i][10]);
                 scanf("%i",&exe[i]);
             }
-        }
-        else{
+        }else{
             invalido++;
         }
       }
+      
       if(invalido == quantia){
         printf("\nNome Invalido");
       }
@@ -159,8 +150,7 @@ int main(){
                 printf(" | %d ", ++*pid);
                 if(nome[i][10] == " "){
                     printf(" |\t0  |        |\n");
-                }
-                else{
+                }else{
                     printf(" | \t%i  ", exe[i]);
                     printf("|\t %i  |\n", fim);
                     fim++;
@@ -172,10 +162,9 @@ int main(){
             inicio = 0;
             fim = quantia;
             *pid = 99;
-        }
-        else{
-            printf("A tabela de processos esta vazia.");
-            break;
+        }else{
+          printf("A tabela de processos esta vazia.");
+          break;
         }
      break;
 
@@ -189,15 +178,13 @@ int main(){
             if(strcmp(ver[0],&nome[i][10]) == 0){
                  nome[i][10] = " ";
                  //exe[i] = 0;
-            }
-            else{
-                invalido++;
+            }else{
+              invalido++;
             }
         }
 
         if(invalido == quantia){
             printf("\nNome invalido");
-
         }
 
         invalido = 0;
