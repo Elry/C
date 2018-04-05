@@ -1,224 +1,168 @@
-#include <stdlib.h>
 #include <stdio.h>
-#include <locale.h>
+#include <stdlib.h>
+#include <string.h>
 
 typedef struct no{
-    int cod;
-    char nome[15];
+    int code;
+    char name[10];
     struct no *next;
 }no;
+struct no *current, *aux, *start;
 
-struct no *auxiliar, *corrente, *inicio;
-
-void Entrada(){
-    printf("Enter value: ");
-    scanf("%i",&auxiliar -> cod);
-    printf("\nType a name: ");
-    scanf("%s",&auxiliar -> nome);
+void enterData(){
+    printf("Insert code: ");
+    scanf("%d", &current->code);
+    printf("Insert name: ");
+    scanf("%s", &current->name);
 }
 
-void insere(no **Lista){
-    system("cls");
-
-    if(inicio == NULL){
-        corrente = (no*)malloc(sizeof(no));
-        auxiliar = corrente;
-        inicio = corrente;
-        corrente->next = NULL;
-
-        Entrada();
+int insert(no**list){
+    if(start == NULL){
+        current = (no*)malloc(sizeof(no));
+        current->next = NULL;
+        start = current;
+        aux = current;
+        enterData();
+    }else{
+        current = (no*)malloc(sizeof(no));
+        aux->next = current;
+        current->next = NULL;
+        aux = current;
+        enterData();
     }
+}
 
-    else{
-        auxiliar = inicio;
-        corrente = inicio;
-
-        while(corrente->next != NULL){
-            corrente = corrente->next;
-            auxiliar = auxiliar->next;
+int show(no**list){
+    if(start == NULL){
+        printf("\n\nThere is no data here yet...\n\n");
+    }else{
+        aux = start;
+        while(aux->next != NULL){
+            printf("\n\nCode: %d \nName: %s\n\n", aux->code, aux->name);
+            aux = aux->next;
         }
-        corrente = (no*)malloc(sizeof(no));
-
-        auxiliar->next = corrente;
-        corrente->next = NULL;
-        auxiliar = corrente;
-
-        Entrada();
+        printf("\n\nCode: %d \nName: %s\n\n", aux->code, aux->name);
     }
-   system("cls");
 }
 
-void search(no **Lista){
-    system("cls");
+int search(no**list){
+    char searchName[10];
+    int found;
+    found = 0;
 
-    int find;
-    int xcod;
+    if(start == NULL){
+        printf("\n\nThere is no data here yet...\n\n");
+    }else{
+        printf("\n\nInsert search name: ");
+        scanf("%s", &searchName);
 
-    if(inicio == NULL){
-        printf("Empty list\n");
-        system("pause");
-    }
-    else{
-        printf("Insert search: ");
-        scanf("%i",&xcod);
-        find = 0;
-        auxiliar = inicio;
+        aux = start;
 
-        while(auxiliar != corrente->next){
-            if(auxiliar->cod == xcod){
-                printf("1 result\n");
-                find = 1;
-
-                system("pause");
-                system("cls");
+        while(aux != NULL){
+            if(strcmp(aux->name, searchName)==0){
+                found = 1;
                 break;
-            }
-            else{
-                auxiliar = auxiliar->next;
+            }else{
+                aux = aux->next;
             }
         }
-        /*while(auxiliar != NULL){
-            if(auxiliar->cod == xcod){
-                printf("1 result\n");
-                find = 1;
 
-                system("pause");
-                system("cls");
-                break;
-            }
-            else{
-                auxiliar = auxiliar->next;
-            }
-        }*/
-        auxiliar = corrente;
-    }
-
-    if(find == 0){
-        printf("404: Not found\n");
-        system("pause");
-        system("cls");
+        if(found == 0){
+            printf("\n\nName searched was not found.\n\n");
+        }else{
+            printf("\n\nFound! Name: %s \nCode: %d\n\n", aux->name, aux->code);
+        }
     }
 }
 
-void exibe(no **Lista){
-    system("cls");
+int deletes(no**list){
+    char searchName[10];
+    int found = 0;
 
-    if (inicio == NULL){
-        printf("Empty List\n\n");
-    }
+    if(start == NULL){
+        printf("\n\nThere is no data here yet...\n\n");
+    }else{
+        printf("\n\nInsert search name to delete: \n\n");
+        scanf("%s", &searchName);
 
-    else{
-        auxiliar = inicio;
+        aux = start;
 
-        printf("Result:\n\n");
+        if(strcmp(aux->name, searchName)==0){
+            start = start->next;
+            free(aux);
+            found = 1;
+        }else{
+            current = aux->next;
 
-        while(auxiliar != NULL){
-            printf("Cod: %i\n", auxiliar->cod);
-            printf("Name: %s\n\n", auxiliar->nome);
-
-            if(auxiliar == corrente){
-                break;
-            }
-            auxiliar = auxiliar->next;
-        }
-    }
-    system("pause");
-    system("cls");
-}
-
-void removing(no **Lista){
-    system("cls");
-
-    int rm, r = 0;
-
-    if(inicio == NULL){
-        printf("Empty list\n");
-        system("pause");
-    }
-
-    else{
-        printf("Type the cod to be deleted: ");
-        scanf("%i",&rm);
-
-        auxiliar = inicio;
-
-        if(auxiliar->cod == rm){
-            inicio = inicio -> next;
-
-            free(auxiliar);
-            r = 1;
-
-            printf("Done\n\n");
-            system("pause");
-        }
-        else{
-            corrente = auxiliar->next;
-
-            while(corrente != NULL){
-                if(corrente->cod == rm){
-                    auxiliar->next = corrente->next;
-
-                    free(corrente);
-                    r = 1;
-
-                    printf("Done\n\n");
-                    system("pause");
-
+            while(current != NULL){
+                if(strcmp(current->name, searchName)==0){
+                    aux->next = current->next;
+                    free(current);
+                    found = 1;
                     break;
-                }
-
-                else{
-                    auxiliar = auxiliar->next;
-                    corrente = corrente->next;
+                }else{
+                    aux = current;
+                    current = current->next;
                 }
             }
         }
+
+        if(found == 0){
+            printf("\n\nName searched was not found.\n\n");
+        }else{
+            printf("\n\nFound and deleted.\n\n", aux->name, aux->code);
+        }
+
+        current = start;
+
+        while(current->next != NULL){
+                current = current->next;
+        }
     }
-    system("cls");
 }
 
-void menu(){
-    int option;
+
+int main(){
+    current = NULL;
+    aux = NULL;
+    start = NULL;
+
+    int op;
 
     do{
-        printf("TYPE 1 TO INSERT\n");
-        printf("\nTYPE 2 TO SHOW\n");
-        printf("\nTYPE 3 TO SEARCH\n");
-        printf("\nTYPE 4 TO REMOVE\n");
-        printf("\nTYPE 5 TO EXIT\n");
+        printf("[1] Insert data.\n");
+        printf("[2] Show data. \n");
+        printf("[3] Search data. \n");
+        printf("[4] Remove data. \n");
+        printf("[0] Exit program.\n");
+        scanf("%d", &op);
 
-        scanf("%i",&option);
+        switch(op){
+            case 1:
+                insert(&start);
+                break;
 
-        if(option == 1){
-            insere(&inicio);
-            system("cls");
-        }
-        else if(option == 2){
-            exibe(&inicio);
-            system("cls");
-        }
-        else if(option == 3){
-            search(&inicio);
-            system("cls");
-        }
-        else if(option == 4){
-            removing(&inicio);
-            system("cls");
-        }
-        else if(option == 5){
-            exit(EXIT_SUCCESS);
-        }
-        else{
-            printf("Unknow values");
-            system("cls");
-        }
-    }while(option != 1 || option != 2);
-}
+            case 2:
+                show(&start);
+                system("pause");
+                break;
 
-void main(){
-    auxiliar = NULL;
-    corrente = NULL;
-    inicio = NULL;
+            case 3:
+                search(&start);
+                system("pause");
+                break;
 
-    menu();
+            case 4:
+                deletes(&start);
+                system("pause");
+                break;
+
+            case 0:
+                exit(0);
+
+            default:
+                printf("End.");
+                system("pause");
+        }
+    }while(op != 0);
 }
