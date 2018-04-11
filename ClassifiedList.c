@@ -18,42 +18,42 @@ void enterData(){
     printf("Insert name: ");
     scanf("%s", &current->name);
 
-    aux = start;
+    aux2 = start;
 
     if(start->next != NULL){
-        while(aux->next != NULL){
-            if(aux->code == current->code){
+        while(aux2->next != NULL){
+            if(aux2->code == current->code){
                 found = 1;
                 free(current);
-                aux2->next = NULL;
+                aux->next = NULL;
                 break;
             }else{
-                aux = aux->next;
+                aux2 = aux2->next;
                 found = 0;
 
                 if(start->code > current->code){
                     printf("\n\nStart is higher than inserted.\n\n");
-                    aux2 = start;
-                    start = current;
-                    current = aux2;
-                    start->next = current;
+                    current = start;
+                    aux->next = current;
+                    start = aux;
                     current->next = NULL;
-                }else if(aux2->code >= current->code){
+                    break;
+                }else if(aux2->code > current->code){
                     printf("\n\nThe number before is higher than the inserted.\n\n");
                     printf("\n\n%d current\n\n", current->code);
                     printf("\n\n%d aux\n\n", aux->code);
                     printf("\n\n%d aux2\n\n", aux2->code);
 
-                    aux->next = current;
-                    current->next = aux2;
+                    aux = aux2->next;
+                    current->next = aux;
+                    aux = current;
+                    current = current->next;
+                    aux2->next = aux;
 
                     printf("\n\n%d current\n\n", current->code);
                     printf("\n\n%d aux\n\n", aux->code);
                     printf("\n\n%d aux2\n\n", aux2->code);
-                }else if(aux2->code > current->code && current->code > aux->code){
-                    printf("\n\nThe inserted is in between.\n\n");
-                    current->next = aux;
-                    aux2->next = current;
+                    break;
                 }
             }
         }
@@ -61,6 +61,8 @@ void enterData(){
         if (found == 1){
             printf("\n\nCod already inserted, try again.\n\n");
         }
+
+        aux = current;
     }
 }
 
@@ -73,15 +75,9 @@ int insert(no**list){
         aux2 = current;
         enterData();
     }else{
-        while(aux2->next != aux){
-            aux2 = aux2->next;
-        }
         current = (no*)malloc(sizeof(no));
-        aux->next = current;
         current->next = NULL;
-        aux = current;
-
-        printf("\n\n%d AUX2\n\n", aux2->code);
+        aux->next = current;
 
         enterData();
     }
@@ -158,6 +154,7 @@ int deletes(no**list){
                 if(strcmp(current->name, searchName)==0){
                     aux->next = current->next;
                     free(current);
+                    aux2->next = NULL;
                     found = 1;
                     break;
                 }else{
