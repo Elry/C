@@ -49,10 +49,24 @@ void enterData(){
 
                     break;
                 }else if(aux2->code > current->code){
-                    printf("\n\nThe number before is higher than the inserted.\n\n");                    
-                    current->next = aux2;
+                    printf("\n\nThe number before is higher than the inserted.\n\n");
+                    aux = start;
+                    while(aux->next != current){
+                        aux = aux->next;
+                    }
+                    aux->next = NULL;                    
+
+                    aux = start;
+                    while(aux->next != aux2){
+                        aux = aux->next;
+                    }
+
                     aux->next = current;
-                    current = aux2->next;                    
+                    current->next = aux2;
+
+                    while(current->next != NULL){
+                        current = current->next;
+                    }
                     break;
                 }
             }
@@ -131,7 +145,7 @@ int search(no**list){
 }
 
 /*======================================== DELETE ==============================================*/
-int deletes(no**list){
+int delete(no**list){
     char searchName[10];
     int found = 0;
 
@@ -161,6 +175,10 @@ int deletes(no**list){
                     aux = aux->next;
                 }
             }
+        }
+
+        while(aux->next != current){
+            aux = aux->next;
         }
 
         if(found == 0){
@@ -203,7 +221,7 @@ int main(){
                 break;
 
             case 4:
-                deletes(&start);
+                delete(&start);
                 system("pause");
                 break;
 
