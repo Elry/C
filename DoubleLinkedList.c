@@ -117,6 +117,8 @@ int delete(no **list){
                 }else{
                     current = aux->back;
                     current->next = aux->next;
+                    current = current->next;
+                    current->back = aux->back;
                 }
                 free(aux);
                 found++;
