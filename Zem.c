@@ -1,10 +1,3 @@
-/*Feito por:
-Adriano Benatti
-Andre Amorim
-Milton Neto
-Rafael Garcia
-*/
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
