@@ -29,8 +29,10 @@ int main(){
             printf("\nBalance: %f", balance[i]);
         }else if(balance[i] == 0){
             printf("\nNull balance.");
+            break;
         }else if(balance[i] < 0){
             printf("\nNegative balance %f.", saldo[i]);
+            break;
         }
     }
     return 0;
