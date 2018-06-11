@@ -1,67 +1,61 @@
 #include <stdio.h>
 
 int main(){
+    int vVehicle, year, age, nParcel, State, VehicleType, ParcelOption, vIPVA;
+    float carSP, carMG, motoSP, motoMG;
 
-int vVeiculo, Ano, Idade, nParcelas, Estado, tVeiculo, pParcela, vIPVA;
-float cSP, cMG, mSP, mMG;
+    carSP = 0.1;
+    carMG = 0.03;
+    motoSP = 0.05;
+    motoMG = 0.05;
+    vIPVA = 0;
 
-cSP = 0.1;
-cMG = 0.03;
-mSP = 0.05;
-mMG = 0.05;
-vIPVA = 0;
+    printf("Type the value of your vehicle: ");
+    scanf("%i",&vVehicle);
 
-printf("Digite o valor do veiculo: ");
-scanf("%i",&vVeiculo);
+    printf("\nType 0 for car, or 1 for motorcycle: ");
+    scanf("%i",&tVehicle);
 
-printf("\nDigite 0 para carro, ou 1 para moto: ");
-scanf("%i",&tVeiculo);
+    printf("\nType 0 for SP, or 1 for MG: ");
+    scanf("%i",&State);
 
-printf("\nDigite 0 para SP, ou 1 para MG: ");
-scanf("%i",&Estado);
+    printf("\nType the year of your vehicle: ");
+    scanf("%i",&year);
 
-printf("\nDigite o ano do veiculo: ");
-scanf("%i",&Ano);
+    age = 2018 - year;
 
-Idade = 2015 - Ano;
+    if(age > 20){
+        printf("\nYour vehicle is old enough to pay any taxes.");
+        return 0;
+    }
 
-        if(Idade > 20){
-            printf("\nIsento, o veiculo tem %i anos", Idade);
-            return 0;
-        }
-
-        if (Estado == 0 && tVeiculo == 0){
-        vIPVA = vVeiculo * cSP;
-        }
-        else if(Estado == 0 && tVeiculo == 1){
-        vIPVA = vVeiculo * mSP;
-        }
-        else if(Estado == 1 && tVeiculo == 0){
-        vIPVA = vVeiculo * cMG;
-        }
-        else if(Estado == 1 && tVeiculo == 1){
+    if (state == 0 && VehicleType == 0){
+        vIPVA = vVehicle * carSP;
+    }else if(state == 0 && VehicleType == 1){
+        vIPVA = vVehicle * motoSP;
+    }else if(state == 1 && VehicleType == 0){
+        vIPVA = vVehicle * carMG;
+    }else if(state == 1 && VehicleType == 1){
         vIPVA = vVeiculo * mMG;
-        }
+    }
 
-        printf("IPVA %i", vIPVA);
-
+    printf("\nIPVA: %i", vIPVA);
 
     if(vIPVA > 1000){
-        printf("\nDigite 0 para parcelar, ou 1 para não parcelar: ");
-        scanf("%i",&pParcela);
+        printf("\nType 0 to parcel, or 1 to not parcel: ");
+        scanf("%i",&ParcelOption);
 
-        if(pParcela == 0){
-            printf("\nDigite quantas parcelas, max 3: ");
-            scanf("%i",&nParcelas);
+        if(ParcelOption == 0){
+            printf("\nHow many parcels? Max is 3: ");
+            scanf("%i",&nParcel);
 
-            if(nParcelas == 2){
-                printf("\nValor de cada parcela: %i", vIPVA/2);
-            }
-            else{
-                printf("\nValor de cada parcela: %i", vIPVA/3);
+            if(nParcel == 2){
+                printf("\nParcel value: %i", vIPVA/2);
+            }else{
+                printf("\nParcel value: %i", vIPVA/3);
             }
         }
     }
 
-return 0;
+    return 0;
 }
