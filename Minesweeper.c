@@ -5,7 +5,7 @@ int main(){
     int nRows, mCols, nCounter, mCounter;
 
     //Char value holder
-    char gValue = ' ';
+    char gValue;
 
     //Mine field size verification and input
     while(nRows <= 0 || mCols > 100){
@@ -16,8 +16,7 @@ int main(){
 
         if(nRows <= 0){
             printf("\nInvalid number of lines. The minimum is 1.\n");
-        }
-        if(nRows <= 0){
+        }else if(nRows <= 0){
             printf("\nInvalid number of columns. The maximum is 100.\n");
         }
     }
@@ -33,7 +32,6 @@ int main(){
             scanf(" %c",&gValue);
 
             fMines[nCounter][mCounter] = gValue;
-
             fNumbers[nCounter][mCounter] = 0;
         }
     }
@@ -41,11 +39,9 @@ int main(){
     system("cls");
 
     //Mine number location equation:
-
     for(nCounter = 0; nCounter < nRows; nCounter++){
         for(mCounter = 0; mCounter < mCols; mCounter ++){
             if(fMines[nCounter][mCounter] == '*'){
-
                 if((nCounter -1 >= 0) && (mCounter - 1 >= 0)){
                     fNumbers[nCounter-1][mCounter-1]++;
                 }
@@ -77,7 +73,6 @@ int main(){
                 if((nCounter + 1 < nRows) && (mCounter + 1 < mCols)){
                     fNumbers[nCounter+1][mCounter+1]++;
                 }
-
             }
         }
     }
@@ -93,9 +88,7 @@ int main(){
         for(mCounter = 0; mCounter < mCols; mCounter++){
             if(fMines[nCounter][mCounter] == '*'){
                 printf("%c",fMines[nCounter][mCounter]);
-            }
-
-            else{
+            }else{
                 printf("%i",fNumbers[nCounter][mCounter]);
             }
         }
