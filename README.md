@@ -1,3 +1,2 @@
 # C
-C_programs
-Qwerty_test
+Data Structures and other simple codes
